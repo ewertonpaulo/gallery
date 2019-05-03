@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% include "navbar.html" %}
+{% block content %}
+<div class="centered">
+<section class="table">
+    <table id="listaUsuarios" class="centered">
+        <tbody>
+            {% for photo in photos %}
+            <tr>
+                <td class="cover-full"><img class="cover" src="{{photo.image.url}}" alt="pic2" border="0"></td>
+                <td>
+                    <a href="{{photo.image.url}}" target="_blank">OPEN</a>
+                    <a href="{% url 'review' photo.id %}">APROVE</a>
+                    <a href="{% url 'delete_photo' photo.id %}">DELETE</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</section>
+<style>
+    #listaUsuarios {
+        margin-left: 35%;
+        width: 400px;
+        background: rgba(255,255,255,.8);
+    }
+    .table {
+        padding-top: auto;
+        padding-bottom: auto;
+    }
+    img {
+        height: 100px;
+        width: 100px;
+    }
+    .cover-full {
+    object-fit: scale-down;
+  }
+</style>
+
+{% endblock %}

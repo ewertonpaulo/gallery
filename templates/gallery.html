@@ -1,0 +1,57 @@
+{% load staticfiles %}
+{% include "navbar.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static "css/gallery.css" %}">
+<br>
+<div class="full-img">
+  <img class="displayed-img cover-full" src="{% static "images/fundo.jpg" %}" alt="pic1" border="0">
+</div>
+<!-- <select name="order">
+  <option selected="selected" disabled></option>
+  <option value="taken_date">Date</option>
+  <option value="likes">Likes</option>
+</select> -->
+<!-- <form action="">
+  <input type="radio" name="date" value="taken_date">Date<br>
+  <input type="radio" name="likes" value="likes">Likes<br>
+</form> -->
+<!-- {{order}} -->
+{% for photo in photos %}
+<div class="gallery-bar">
+    <img class="cover" src="{{photo.image.url}}" alt="pic2" border="0">
+</div>
+{% endfor %}
+<br><br><br><br><br>
+{% if photos.has_other_pages %}
+<ul class="pagination">
+  {% if photos.has_previous %}
+  <li><a href="?page={{ photos.previous_page_number }}">&laquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&laquo;</span></li>
+  {% endif %}
+  {% for i in photos.paginator.page_range %}
+  {% if photos.number == i %}
+  <li class="active"><span></span>page {{ i }} <span class="sr-only">(current)</span></span></li>
+  {% else %}
+  <li><a href="?page={{ i }}">page {{ i }} </a></li>
+  {% endif %}
+  {% endfor %}
+  {% if photos.has_next %}
+  <li><a href="?page={{ photos.next_page_number }}">&raquo;</a></li>
+  {% else %}
+  <li class="disabled"><span>&raquo;</span></li>
+  {% endif %}
+</ul>
+{% endif %}
+{% endblock %}
+<script>
+  let displayedImg = document.querySelector("img.displayed-img");
+  let images = document.querySelectorAll(".gallery-bar img");
+
+  for (let i = 0; i < images.length; i++) {
+    images[i].onclick = function (event) {
+      displayedImg.setAttribute("src", event.target.src);
+    }
+  }
+</script>

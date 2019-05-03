@@ -1,0 +1,20 @@
+{% load staticfiles %}
+{% include "navbar.html" %}
+{% block content %}
+
+<section class="centered">
+  <div class="rating centered">
+    <form method="POST" enctype="multipart/form-data">
+
+      {% csrf_token %}
+      <div>
+
+        {{form}}
+      </div>
+
+      <button type="submit"> UPLOAD </button>
+
+    </form>
+  </div>
+</section>
+{% endblock %}
