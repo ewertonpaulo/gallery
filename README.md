@@ -1,2 +1,8 @@
-# fui
-Prjeto Avançado I - 2018.1
+## Prepare environment:
+```
+$ pip install -r requirements.txt
+```
+## Run aplication
+```
+$ python mnage.py runserver
+```
